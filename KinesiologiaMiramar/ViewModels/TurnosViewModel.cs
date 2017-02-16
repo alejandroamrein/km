@@ -9,6 +9,8 @@ using KinesiologiaMiramar.Helpers;
 using KinesiologiaMiramar.Views;
 using KinesiologiaMiramar.Models;
 using System.Data.Entity;
+using System.Windows.Media;
+using System.Timers;
 
 namespace KinesiologiaMiramar.ViewModels
 {
@@ -23,9 +25,21 @@ namespace KinesiologiaMiramar.ViewModels
         private ICommand _VerImagenCommand;
         private WeekViewModel _WeekViewModel;
         private Orden _Orden;
+        private Brush _IndicatorBackground;
+        private readonly Brush _TransparentBrush = new SolidColorBrush(Colors.Transparent);
+        private readonly Brush _HiliteBrush = new SolidColorBrush(Colors.Yellow);
+        private Timer _HiliteTimer;
 
         public TurnosViewModel()
         {
+            _HiliteTimer = new Timer();
+            _HiliteTimer.Enabled = false;
+            _HiliteTimer.Elapsed += (sender, e) => {
+                IndicatorBackground = _TransparentBrush;
+                (sender as Timer).Enabled = false;
+            };
+            _HiliteTimer.Interval = 5000;
+            _IndicatorBackground = _TransparentBrush;
             var hoy = DateTime.Today;
             _WeekViewModel = new WeekViewModel(SemanaDe(hoy), (dia, turnoHora, slot) => {
                 if (_Orden == null)
@@ -57,8 +71,14 @@ namespace KinesiologiaMiramar.ViewModels
                 var db = new kmEntities();
                 using (db)
                 {
-                    db.Turnos.Attach(e.Turno);
-                    db.Entry(e.Turno).State = EntityState.Deleted;
+                    var turno = db.Turnos.Find(e.Turno.PK_Turno);
+                    if (_Orden != null && turno.FK_Orden.Value == _Orden.PK_Orden)
+                    {
+                        int usadas = UpdateSesionesUsadas(turno.FK_Orden.Value);
+                        _Orden.SesionesUsadas = usadas - 1;
+                        RaisePropertyChanged("Restantes");
+                    }
+                    db.Turnos.Remove(turno);
                     db.SaveChanges();
                 }
             };
@@ -82,8 +102,33 @@ namespace KinesiologiaMiramar.ViewModels
                 var t = from x in db.Turnos.Include("Orden").Include("Orden.Paciente")
                         where x.PK_Turno == turno.PK_Turno
                         select x;
+
+                if (_Orden != null && turno.FK_Orden.Value == _Orden.PK_Orden)
+                {
+                    int usadas = UpdateSesionesUsadas(turno.FK_Orden.Value);
+                    _Orden.SesionesUsadas = usadas;
+                    RaisePropertyChanged("Restantes");
+                }
+
                 return t.First();
             }
+        }
+
+        private int UpdateSesionesUsadas(int fK_Orden)
+        {
+            int usadas = 0;
+            var db = new kmEntities();
+            using (db)
+            {
+                var turnosAsignados = db.Turnos.Where(t => t.FK_Orden == fK_Orden).Count();
+                var orden = db.Ordenes.Find(fK_Orden);
+                orden.SesionesUsadas = turnosAsignados;
+                usadas = turnosAsignados;
+                db.SaveChanges();
+            }
+            IndicatorBackground = _HiliteBrush;
+            _HiliteTimer.Enabled = true;
+            return usadas;
         }
 
         private DateTime SemanaDe(DateTime hoy)
@@ -254,5 +299,26 @@ namespace KinesiologiaMiramar.ViewModels
             }
         }
 
+        public Brush IndicatorBackground
+        {
+            get
+            {
+                return _IndicatorBackground;
+            }
+
+            set
+            {
+                _IndicatorBackground = value;
+                RaisePropertyChanged("IndicatorBackground");
+            }
+        }
+
+        public int Restantes
+        {
+            get
+            {
+                return _Orden.SesionesRestantes;
+            }
+        }
     }
 }

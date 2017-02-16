@@ -99,7 +99,8 @@
                            HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBlock Grid.Column="8" Margin="0" FontWeight="Bold" Text="Restantes" 
                            HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-                <TextBlock Grid.Row="1" Grid.Column="8" Margin="0" FontSize="14" FontWeight="DemiBold" Text="{Binding Orden.SesionesRestantes}" 
+                <TextBlock Grid.Row="1" Grid.Column="8" Margin="0" FontSize="14" FontWeight="DemiBold" 
+                           Text="{Binding Restantes}" Background="{Binding IndicatorBackground, Mode=TwoWay}"
                            HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <Button Grid.Row="0" Grid.Column="9" HorizontalAlignment="Right" Grid.RowSpan="2" Width="50" 
                         VerticalAlignment="Stretch" Margin="2" Command="{Binding VerImagenCommand}">
