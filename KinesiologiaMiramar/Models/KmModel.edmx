@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="kmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ObraSocial">
+          <Key>
+            <PropertyRef Name="PK_Os" />
+          </Key>
+          <Property Name="PK_Os" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="PK_Orden" />
+          </Key>
+          <Property Name="PK_Orden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Paciente" Type="int" Nullable="false" />
+          <Property Name="Medico" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Sesiones" Type="int" Nullable="false" />
+          <Property Name="SesionesUsadas" Type="int" Nullable="false" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="PK_Paciente" />
+          </Key>
+          <Property Name="PK_Paciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FecNac" Type="date" />
+          <Property Name="Calle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Localidad" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodPostal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Telefono1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefono2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefono3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="FK_Os" Type="int" />
+          <Property Name="OsAfiliado" Type="nvarchar" MaxLength="50" />
+          <Property Name="OsPlan" Type="nchar" MaxLength="10" />
+          <Property Name="OsIva" Type="nchar" MaxLength="1" />
+          <Property Name="Sexo" Type="nchar" MaxLength="1" />
+          <Property Name="FechaIngreso" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Turno">
+          <Key>
+            <PropertyRef Name="PK_Turno" />
+          </Key>
+          <Property Name="PK_Turno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="TurnoHora" Type="int" />
+          <Property Name="Slot" Type="int" />
+          <Property Name="FK_Orden" Type="int" />
+          <Property Name="Presente" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Orden_Paciente">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="PK_Paciente" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="FK_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paciente_ObraSocial">
+          <End Role="ObraSocial" Type="Self.ObraSocial" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObraSocial">
+              <PropertyRef Name="PK_Os" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="FK_Os" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turno_Orden">
+          <End Role="Orden" Type="Self.Orden" Multiplicity="0..1" />
+          <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden">
+              <PropertyRef Name="PK_Orden" />
+            </Principal>
+            <Dependent Role="Turno">
+              <PropertyRef Name="FK_Orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kmModelStoreContainer">
+          <EntitySet Name="ObraSocial" EntityType="Self.ObraSocial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orden" EntityType="Self.Orden" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Orden_Paciente" Association="Self.FK_Orden_Paciente">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paciente_ObraSocial" Association="Self.FK_Paciente_ObraSocial">
+            <End Role="ObraSocial" EntitySet="ObraSocial" />
+            <End Role="Paciente" EntitySet="Paciente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turno_Orden" Association="Self.FK_Turno_Orden">
+            <End Role="Orden" EntitySet="Orden" />
+            <End Role="Turno" EntitySet="Turno" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="kmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ObrasSociales" EntityType="kmModel.ObraSocial" />
+          <EntitySet Name="Ordenes" EntityType="kmModel.Orden" />
+          <EntitySet Name="Pacientes" EntityType="kmModel.Paciente" />
+          <EntitySet Name="Turnos" EntityType="kmModel.Turno" />
+          <AssociationSet Name="FK_Paciente_ObraSocial" Association="kmModel.FK_Paciente_ObraSocial">
+            <End Role="ObraSocial" EntitySet="ObrasSociales" />
+            <End Role="Paciente" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orden_Paciente" Association="kmModel.FK_Orden_Paciente">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Orden" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turno_Orden" Association="kmModel.FK_Turno_Orden">
+            <End Role="Orden" EntitySet="Ordenes" />
+            <End Role="Turno" EntitySet="Turnos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ObraSocial">
+          <Key>
+            <PropertyRef Name="PK_Os" />
+          </Key>
+          <Property Name="PK_Os" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Paciente" Relationship="kmModel.FK_Paciente_ObraSocial" FromRole="ObraSocial" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="PK_Orden" />
+          </Key>
+          <Property Name="PK_Orden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Paciente" Type="Int32" Nullable="false" />
+          <Property Name="Medico" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sesiones" Type="Int32" Nullable="false" />
+          <Property Name="SesionesUsadas" Type="Int32" Nullable="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Paciente" Relationship="kmModel.FK_Orden_Paciente" FromRole="Orden" ToRole="Paciente" />
+          <NavigationProperty Name="Turno" Relationship="kmModel.FK_Turno_Orden" FromRole="Orden" ToRole="Turno" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="PK_Paciente" />
+          </Key>
+          <Property Name="PK_Paciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FecNac" Type="DateTime" Precision="0" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FK_Os" Type="Int32" />
+          <Property Name="OsAfiliado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OsPlan" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OsIva" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ObraSocial" Relationship="kmModel.FK_Paciente_ObraSocial" FromRole="Paciente" ToRole="ObraSocial" />
+          <NavigationProperty Name="Orden" Relationship="kmModel.FK_Orden_Paciente" FromRole="Paciente" ToRole="Orden" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Turno">
+          <Key>
+            <PropertyRef Name="PK_Turno" />
+          </Key>
+          <Property Name="PK_Turno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="TurnoHora" Type="Int32" />
+          <Property Name="Slot" Type="Int32" />
+          <Property Name="FK_Orden" Type="Int32" />
+          <Property Name="Presente" Type="Boolean" />
+          <NavigationProperty Name="Orden" Relationship="kmModel.FK_Turno_Orden" FromRole="Turno" ToRole="Orden" />
+        </EntityType>
+        <Association Name="FK_Paciente_ObraSocial">
+          <End Type="kmModel.ObraSocial" Role="ObraSocial" Multiplicity="0..1" />
+          <End Type="kmModel.Paciente" Role="Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObraSocial">
+              <PropertyRef Name="PK_Os" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="FK_Os" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orden_Paciente">
+          <End Type="kmModel.Paciente" Role="Paciente" Multiplicity="1" />
+          <End Type="kmModel.Orden" Role="Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="PK_Paciente" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="FK_Paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turno_Orden">
+          <End Type="kmModel.Orden" Role="Orden" Multiplicity="0..1" />
+          <End Type="kmModel.Turno" Role="Turno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden">
+              <PropertyRef Name="PK_Orden" />
+            </Principal>
+            <Dependent Role="Turno">
+              <PropertyRef Name="FK_Orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kmModelStoreContainer" CdmEntityContainer="kmEntities">
+          <EntitySetMapping Name="ObrasSociales">
+            <EntityTypeMapping TypeName="kmModel.ObraSocial">
+              <MappingFragment StoreEntitySet="ObraSocial">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="PK_Os" ColumnName="PK_Os" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordenes">
+            <EntityTypeMapping TypeName="kmModel.Orden">
+              <MappingFragment StoreEntitySet="Orden">
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="SesionesUsadas" ColumnName="SesionesUsadas" />
+                <ScalarProperty Name="Sesiones" ColumnName="Sesiones" />
+                <ScalarProperty Name="Medico" ColumnName="Medico" />
+                <ScalarProperty Name="FK_Paciente" ColumnName="FK_Paciente" />
+                <ScalarProperty Name="PK_Orden" ColumnName="PK_Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="kmModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="OsIva" ColumnName="OsIva" />
+                <ScalarProperty Name="OsPlan" ColumnName="OsPlan" />
+                <ScalarProperty Name="OsAfiliado" ColumnName="OsAfiliado" />
+                <ScalarProperty Name="FK_Os" ColumnName="FK_Os" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono3" ColumnName="Telefono3" />
+                <ScalarProperty Name="Telefono2" ColumnName="Telefono2" />
+                <ScalarProperty Name="Telefono1" ColumnName="Telefono1" />
+                <ScalarProperty Name="CodPostal" ColumnName="CodPostal" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="FecNac" ColumnName="FecNac" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="PK_Paciente" ColumnName="PK_Paciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turnos">
+            <EntityTypeMapping TypeName="kmModel.Turno">
+              <MappingFragment StoreEntitySet="Turno">
+                <ScalarProperty Name="Presente" ColumnName="Presente" />
+                <ScalarProperty Name="FK_Orden" ColumnName="FK_Orden" />
+                <ScalarProperty Name="Slot" ColumnName="Slot" />
+                <ScalarProperty Name="TurnoHora" ColumnName="TurnoHora" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="PK_Turno" ColumnName="PK_Turno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

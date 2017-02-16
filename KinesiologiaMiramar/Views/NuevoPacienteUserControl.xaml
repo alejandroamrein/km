@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="KinesiologiaMiramar.Views.NuevoPacienteUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KinesiologiaMiramar.Views"
+             xmlns:helpers="clr-namespace:KinesiologiaMiramar.Helpers"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             d:DesignHeight="600" d:DesignWidth="800" Margin="5">
+    <UserControl.Resources>
+        <helpers:RadioButtonConverter x:Key="radioConverter" />
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Gainsboro" Opacity="0.8" >
+        <Grid Margin="20" VerticalAlignment="Top" HorizontalAlignment="left" Width="800">
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="2,10,2,2" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Margin" Value="2,2,10,2" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                </Style>
+                <Style TargetType="{x:Type ComboBox}">
+                    <Setter Property="Margin" Value="2,2,10,2" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                </Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="2,2,10,2" />
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Width" Value="75" />
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Row 2 -->
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding ErrorMessage}" Foreground="Red" Grid.ColumnSpan="4" />
+            <!-- Row 3 -->
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="Apellido" />
+            <TextBlock Grid.Column="2" Grid.Row="3" Text="Nombre" Height="16" />
+            <TextBlock Grid.Column="3" Grid.Row="3" Text="Fec.Nac." Height="16" />
+            <TextBlock Grid.Column="4" Grid.Row="3" Text="Sexo" Height="16" />
+            <!-- Row 4 -->
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Paciente.Apellido}" />
+            <TextBox Grid.Column="2" Grid.Row="4" Text="{Binding Paciente.Nombre}" />
+            <StackPanel Grid.Column="3" Grid.Row="4" Orientation="Horizontal">
+                <DatePicker SelectedDate="{Binding FecNac}" Width="120"    
+                            HorizontalAlignment="Left" />
+                <TextBlock Text="{Binding Edad, Mode=OneWay}" Margin="10,0,0,0" />
+            </StackPanel>
+            <StackPanel Grid.Column="4" Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
+                <RadioButton GroupName="Sexo" Content="Femenino" IsChecked="{Binding PropertyValue}" />
+                <RadioButton GroupName="Sexo" Content="Masculino" IsChecked="{Binding Paciente.Sexo, Converter={StaticResource radioConverter}}" Margin="10,0,0,0" />
+            </StackPanel>
+            <!-- Row 5 -->
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="No. Documento" Height="16" />
+            <TextBlock Grid.Column="2" Grid.Row="5" Text="Calle" Height="16" />
+            <TextBlock Grid.Column="3" Grid.Row="5" Text="Localidad" Height="16" />
+            <TextBlock Grid.Column="4" Grid.Row="5" Text="Codigo postal" Height="16" />
+            <!-- Row 6 -->
+            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Paciente.Documento}" />
+            <TextBox Grid.Column="2" Grid.Row="6" Text="{Binding Paciente.Calle}" />
+            <TextBox Grid.Column="3" Grid.Row="6" Text="{Binding Paciente.Localidad}" />
+            <TextBox Grid.Column="4" Grid.Row="6" Text="{Binding Paciente.CodPostal}" />
+            <!-- Row 7 -->
+            <TextBlock Grid.Column="1" Grid.Row="7" Text="Telefono 1" Height="16" />
+            <TextBlock Grid.Column="2" Grid.Row="7" Text="Telefono 2" Height="16" />
+            <TextBlock Grid.Column="3" Grid.Row="7" Text="EMail" Height="16" />
+            <!-- Row 8 -->
+            <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Paciente.Telefono1}" />
+            <TextBox Grid.Column="2" Grid.Row="8" Text="{Binding Paciente.Telefono2}" />
+            <TextBox Grid.Column="3" Grid.Row="8" Text="{Binding Paciente.Email}" Grid.ColumnSpan="2" />
+            <!-- Row 9 -->
+            <TextBlock Grid.Column="1" Grid.Row="9" Text="Obra social" />
+            <TextBlock Grid.Column="2" Grid.Row="9" Text="Plan" />
+            <TextBlock Grid.Column="3" Grid.Row="9" Text="Nro.Afiliado" />
+            <TextBlock Grid.Column="4" Grid.Row="9" Text="IVA" />
+            <!-- Row 10 -->
+            <ComboBox Grid.Column="1" Grid.Row="10" ItemsSource="{Binding ObrasSociales}"
+                      SelectedValue="{Binding Paciente.FK_Os}" DisplayMemberPath="Descripcion"
+                      SelectedValuePath="PK_Os"/>
+            <TextBox Grid.Column="2" Grid.Row="10" Text="{Binding Paciente.OsPlan}" />
+            <TextBox Grid.Column="3" Grid.Row="10" Text="{Binding Paciente.OsAfiliado}" />
+            <ComboBox Grid.Column="4" Grid.Row="10" ItemsSource="{Binding TiposDeIva}"
+                      SelectedValue="{Binding Paciente.OsIva}" DisplayMemberPath="Descripcion"
+                      SelectedValuePath="Code"/>
+            <!-- Row 11 -->
+            <TextBlock Grid.Column="1" Grid.Row="11" Text="Observaciones" />
+            <!-- Row 12 -->
+            <TextBox Grid.Column="1" Grid.Row="12" Text="{Binding Paciente.Observaciones}" Grid.ColumnSpan="4"
+                     Height="80" AcceptsReturn="True" TextWrapping="Wrap" 
+                     HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" />
+            <!-- Row 13 -->
+            <Button Grid.Column="4" Grid.Row="13" Command="{Binding SaveCommand}" Content="Guardar" />
+        </Grid>
+    </Grid>
+</UserControl>

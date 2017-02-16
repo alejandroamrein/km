@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F2DA48E-B88B-4478-BEBB-55DCCA9B62D4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KinesiologiaMiramar</RootNamespace>
+    <AssemblyName>KinesiologiaMiramar</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Helpers\BinaryImageConverter.cs" />
+    <Compile Include="Helpers\RadioButtonConverter.cs" />
+    <Compile Include="Helpers\SetMainContentEventArgs.cs" />
+    <Compile Include="Helpers\CloseEventArgs.cs" />
+    <Compile Include="Helpers\ImageButton.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Models\TipoDeIva.cs" />
+    <Compile Include="Models\KmModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KmModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KmModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KmModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KmModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ObraSocial.cs">
+      <DependentUpon>KmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orden.cs">
+      <DependentUpon>KmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Paciente.cs">
+      <DependentUpon>KmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orden.Custom.cs" />
+    <Compile Include="Models\Turno.cs">
+      <DependentUpon>KmModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Reportes\PacientesUserControl.xaml.cs">
+      <DependentUpon>PacientesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WeekUserControl.xaml.cs">
+      <DependentUpon>WeekUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SlotsUserControl.xaml.cs">
+      <DependentUpon>SlotsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PasteEventArgs.cs" />
+    <Compile Include="ViewModels\CutCopyEventArgs.cs" />
+    <Compile Include="ViewModels\NuevaOrdenViewModel.cs" />
+    <Compile Include="Models\Paciente.Custom.cs" />
+    <Compile Include="ViewModels\OrdenImagenViewModel.cs" />
+    <Compile Include="ViewModels\PacientesViewModel.cs" />
+    <Compile Include="ViewModels\ObrasSocialesViewModel.cs" />
+    <Compile Include="ViewModels\ReportesViewModel.cs" />
+    <Compile Include="ViewModels\WeekViewModel.cs" />
+    <Compile Include="ViewModels\SlotViewModel.cs" />
+    <Compile Include="ViewModels\TurnosViewModel.cs" />
+    <Compile Include="ViewModels\OrdenesViewModel.cs" />
+    <Compile Include="ViewModels\NuevoPacienteViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\NuevaOrdenUserControl.xaml.cs">
+      <DependentUpon>NuevaOrdenUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdenImagenWindow.xaml.cs">
+      <DependentUpon>OrdenImagenWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PacientesUserControl.xaml.cs">
+      <DependentUpon>PacientesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportesUserControl.xaml.cs">
+      <DependentUpon>ReportesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObrasSocialesUserControl.xaml.cs">
+      <DependentUpon>ObrasSocialesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeleccionarOrdenWindow.xaml.cs">
+      <DependentUpon>SeleccionarOrdenWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TurnosUserControl.xaml.cs">
+      <DependentUpon>TurnosUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdenesUserControl.xaml.cs">
+      <DependentUpon>OrdenesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NuevoPacienteUserControl.xaml.cs">
+      <DependentUpon>NuevoPacienteUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UserControls\Reportes\PacientesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WeekUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SlotsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\ViewModelBase.cs" />
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\NuevaOrdenUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OrdenImagenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PacientesUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReportesUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ObrasSocialesUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SeleccionarOrdenWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TurnosUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OrdenesUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NuevoPacienteUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="Models\KmModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KmModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\KmModel.edmx.diagram">
+      <DependentUpon>KmModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\160_F_130578163_WcENkLYZawriLF2NdCiULPzrIpj1y06K.jpg" />
+    <Resource Include="Images\Calendar-128.png" />
+    <Resource Include="Images\ic_search_48px-128.png" />
+    <Resource Include="Images\u19489389.jpg" />
+    <Resource Include="Images\turno.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\km_logo_mediano.jpg" />
+    <Resource Include="Images\km_logo_redondo.jpg" />
+    <Resource Include="Images\km_nuevo_turno.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Docs\km.sql" />
+    <Content Include="Docs\obras sociales.sql" />
+    <Resource Include="Images\search.jpg" />
+    <Resource Include="Images\door_exit.png" />
+    <Resource Include="Images\patient-icon-png-21.png" />
+    <Resource Include="Images\medical_clipboard-512.png" />
+    <Resource Include="Images\4767_medicina.jpg" />
+    <Resource Include="Images\report.png" />
+    <Resource Include="Images\4767_medicina.png" />
+    <Resource Include="Images\u19489389.png" />
+    <Resource Include="Images\add2.png" />
+    <Resource Include="Images\delete-icon.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\yes.png" />
+    <Resource Include="Images\mood.png" />
+    <Resource Include="Images\copy.png" />
+    <Resource Include="Images\cut.png" />
+    <Resource Include="Images\paste.png" />
+    <Resource Include="Docs\TODO.txt" />
+    <Resource Include="Images\clear.gif" />
+    <Content Include="Models\KmModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KmModel.Context.cs</LastGenOutput>
+      <DependentUpon>KmModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\KmModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KmModel.edmx</DependentUpon>
+      <LastGenOutput>KmModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

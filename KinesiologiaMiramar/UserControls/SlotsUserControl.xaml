@@ -1,0 +1,235 @@
+﻿<UserControl x:Class="KinesiologiaMiramar.UserControls.SlotsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KinesiologiaMiramar.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Coral" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Text1}" Value="Libre">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="LightGreen" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Coral" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Text2}" Value="Libre">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="LightGreen" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyle3" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Coral" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Text3}" Value="Libre">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="LightGreen" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyle4" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Coral" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Text4}" Value="Libre">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="LightGreen" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyle5" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="Coral" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Text5}" Value="Libre">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="LightGreen" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="LightGray">
+        <UniformGrid Rows="5" Margin="10" Columns="1">
+            <Grid>
+                <Button Content="{Binding Text1}" Style="{StaticResource ButtonStyle1}" Command="{Binding Click1Command}" />
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" BorderThickness="0"
+                        Background="Transparent" Visibility="{Binding Delete1Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/mood.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" 
+                        BorderThickness="0"  Command="{Binding Paste1Command}"
+                        Background="Transparent" Visibility="{Binding Paste1Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/paste.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="30,5,0,20" 
+                        BorderThickness="0" Command="{Binding Copy1Command}"
+                        Background="Transparent" Visibility="{Binding Delete1Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/copy.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="55,5,0,20" 
+                        BorderThickness="0" Command="{Binding Cut1Command}"
+                        Background="Transparent" Visibility="{Binding Delete1Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/cut.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,5,5,20" 
+                        BorderThickness="0" Command="{Binding Delete1Command}"
+                        Background="Transparent" Visibility="{Binding Delete1Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/delete-icon.png" 
+                           Height="16" Width="16" />
+                </Button>
+            </Grid>
+            <Grid>
+                <Button Content="{Binding Text2}" Style="{StaticResource ButtonStyle2}" Command="{Binding Click2Command}" />
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" BorderThickness="0"
+                        Background="Transparent" Visibility="{Binding Delete2Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/mood.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" 
+                        BorderThickness="0" Command="{Binding Paste2Command}"
+                        Background="Transparent" Visibility="{Binding Paste2Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/paste.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="30,5,0,20" 
+                        BorderThickness="0" Command="{Binding Copy2Command}"
+                        Background="Transparent" Visibility="{Binding Delete2Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/copy.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="55,5,0,20" 
+                        BorderThickness="0" Command="{Binding Cut2Command}"
+                        Background="Transparent" Visibility="{Binding Delete2Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/cut.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,5,5,20" 
+                        BorderThickness="0" Command="{Binding Delete2Command}"
+                        Background="Transparent" Visibility="{Binding Delete2Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/delete-icon.png" 
+                           Height="16" Width="16" />
+                </Button>
+            </Grid>
+            <Grid>
+                <Button Content="{Binding Text3}" Style="{StaticResource ButtonStyle3}" Command="{Binding Click3Command}" />
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" BorderThickness="0"
+                        Background="Transparent" Visibility="{Binding Delete3Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/mood.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="30,5,0,20" 
+                        BorderThickness="0" Command="{Binding Copy3Command}"
+                        Background="Transparent" Visibility="{Binding Delete3Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/copy.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="55,5,0,20" 
+                        BorderThickness="0" Command="{Binding Cut3Command}"
+                        Background="Transparent" Visibility="{Binding Delete3Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/cut.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" 
+                        BorderThickness="0"  Command="{Binding Paste3Command}"
+                        Background="Transparent" Visibility="{Binding Paste3Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/paste.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,5,5,20" 
+                        BorderThickness="0" Command="{Binding Delete3Command}"
+                        Background="Transparent" Visibility="{Binding Delete3Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/delete-icon.png" 
+                           Height="16" Width="16" />
+                </Button>
+            </Grid>
+            <Grid>
+                <Button Content="{Binding Text4}" Style="{StaticResource ButtonStyle4}" Command="{Binding Click4Command}" />
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" BorderThickness="0"
+                        Background="Transparent" Visibility="{Binding Delete4Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/mood.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" 
+                        BorderThickness="0" Command="{Binding Paste4Command}"
+                        Background="Transparent" Visibility="{Binding Paste4Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/paste.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="30,5,0,20" 
+                        BorderThickness="0" Command="{Binding Copy4Command}"
+                        Background="Transparent" Visibility="{Binding Delete4Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/copy.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="55,5,0,20" 
+                        BorderThickness="0" Command="{Binding Cut4Command}"
+                        Background="Transparent" Visibility="{Binding Delete4Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/cut.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,5,5,20" 
+                        BorderThickness="0" Command="{Binding Delete4Command}"
+                        Background="Transparent" Visibility="{Binding Delete4Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/delete-icon.png" 
+                           Height="16" Width="16" />
+                </Button>
+            </Grid>
+            <Grid>
+                <Button Content="{Binding Text5}" Style="{StaticResource ButtonStyle5}" Command="{Binding Click5Command}" />
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" BorderThickness="0"
+                        Background="Transparent" Visibility="{Binding Delete5Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/mood.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="30,5,0,20" 
+                        BorderThickness="0" Command="{Binding Copy5Command}"
+                        Background="Transparent" Visibility="{Binding Delete5Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/copy.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="5,5,0,20" 
+                        BorderThickness="0" Command="{Binding Paste5Command}"
+                        Background="Transparent" Visibility="{Binding Paste5Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/paste.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="55,5,0,20" 
+                        BorderThickness="0" Command="{Binding Cut5Command}"
+                        Background="Transparent" Visibility="{Binding Delete5Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/cut.png" 
+                           Height="16" Width="16" />
+                </Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Margin="0,5,5,20" 
+                        BorderThickness="0" Command="{Binding Delete5Command}"
+                        Background="Transparent" Visibility="{Binding Delete5Visibility}">
+                    <Image Source="/KinesiologiaMiramar;component/Images/delete-icon.png" 
+                           Height="16" Width="16" />
+                </Button>
+            </Grid>
+        </UniformGrid>
+    </Grid>
+</UserControl>

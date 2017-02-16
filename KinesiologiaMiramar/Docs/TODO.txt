@@ -1,0 +1,19 @@
+﻿Fecha de nacimiento y calculo de edad
+
+CRUDQ de obras sociales
+
+CRUDQ de tipo de IVA
+
+Actualizar siempre las sesiones restantes
+- Cada vez que se copy/cut/paste una reserva
+- Cada vez que se reserva
+
+declare @suma int
+select @suma = count(*) 
+from Turno where FK_Orden = 4
+print @suma
+
+update Orden set SesionesUsadas = @suma
+where Orden.PK_Orden = 4
+
+

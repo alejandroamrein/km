@@ -1,0 +1,30 @@
+﻿<Window x:Class="KinesiologiaMiramar.Views.OrdenImagenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KinesiologiaMiramar.Views"
+        xmlns:helpers="clr-namespace:KinesiologiaMiramar.Helpers"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Orden" Height="500" Width="700">
+    <Window.Resources>
+        <helpers:BinaryImageConverter x:Key="imgConverter" />
+    </Window.Resources>
+    <Grid Margin="5" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Slider Margin="5" Minimum="0.2" Maximum="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                Value="{Binding Scale}" />
+        <ScrollViewer Grid.Row="1" Margin="5">
+            <Image Source="{Binding Orden.Imagen, Converter={StaticResource imgConverter}}" 
+                       VerticalAlignment="Top" Stretch="UniformToFill">
+                <Image.RenderTransform>
+                    <ScaleTransform ScaleX="{Binding Scale}" ScaleY="{Binding Scale}" />
+                </Image.RenderTransform>
+            </Image>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -1,0 +1,65 @@
+﻿<Window x:Class="KinesiologiaMiramar.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KinesiologiaMiramar"
+        xmlns:helpers="clr-namespace:KinesiologiaMiramar.Helpers"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="ImageButton">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="{Binding Path=(helpers:ImageButton.Image), RelativeSource={RelativeSource AncestorType={x:Type Button}}}" 
+                                       Margin="2" Height="50" />
+                                <TextBlock Text="{Binding Path=(helpers:ImageButton.Caption), RelativeSource={RelativeSource AncestorType={x:Type Button}}}" 
+                                           Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" />
+                            </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Width" Value="100" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Height="100" VerticalAlignment="Top" Orientation="Horizontal">
+        <Button Style="{DynamicResource ImageButton}" Command="{Binding PacientesCommand}" 
+                helpers:ImageButton.Image="/KinesiologiaMiramar;component/Images/patient-icon-png-21.png"
+                helpers:ImageButton.Caption="Pacientes" />
+            <Button Style="{DynamicResource ImageButton}" Command="{Binding OrdenesCommand}" 
+                helpers:ImageButton.Image="/KinesiologiaMiramar;component/Images/turno.png" 
+                helpers:ImageButton.Caption="Ordenes" />
+        <Button Style="{DynamicResource ImageButton}" Command="{Binding NuevoPacienteCommand}" 
+                helpers:ImageButton.Image="/KinesiologiaMiramar;component/Images/medical_clipboard-512.png" 
+                helpers:ImageButton.Caption="Nuevo paciente" />
+        <Button Style="{DynamicResource ImageButton}" Command="{Binding ObrasSocialesCommand}" 
+                helpers:ImageButton.Image="/KinesiologiaMiramar;component/Images/4767_medicina.png" 
+                helpers:ImageButton.Caption="Obras Sociales" />
+        <Button Style="{DynamicResource ImageButton}" Command="{Binding TurnosCommand}" 
+                helpers:ImageButton.Image="/KinesiologiaMiramar;component/Images/u19489389.png" 
+                helpers:ImageButton.Caption="Turnos" />
+            <Button Style="{DynamicResource ImageButton}" Command="{Binding ReportesCommand}" 
+                helpers:ImageButton.Image="/KinesiologiaMiramar;component/Images/report.png" 
+                helpers:ImageButton.Caption="Informes" />
+            <Button Style="{DynamicResource ImageButton}" Command="{Binding SalirCommand}" 
+                helpers:ImageButton.Image="/KinesiologiaMiramar;component/Images/door_exit.png" 
+                helpers:ImageButton.Caption="Salir" />
+        </StackPanel>
+        <Grid Grid.Row="1" Name="MainContent">
+            <Grid.Background>
+                <ImageBrush ImageSource="/KinesiologiaMiramar;component/Images/km_logo_mediano.jpg" Opacity="0.3" />
+            </Grid.Background>
+        </Grid>
+    </Grid>
+</Window>
